@@ -1,0 +1,86 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass;
+use ParentDummyFullModelClass;
+use Illuminate\Http\Request;
+use DummyRootNamespaceHttp\Controllers\Controller;
+use DummyRootNamespaceHttp\Resources\DummyModelClassCollection;
+
+class DummyClass extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @param  \ParentDummyFullModelClass  $ParentDummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request, ParentDummyModelClass $ParentDummyModelVariable)
+    {
+        // $this->authorize('viewAny', DummyModelClass::class);
+
+        return new DummyModelClassCollection(
+            $ParentDummyModelVariable->DummyModelVariables()->filterOn($request)->paginate($request->itemsPerPage)
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \ParentDummyFullModelClass  $ParentDummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request, ParentDummyModelClass $ParentDummyModelVariable)
+    {
+        // $this->authorize('create', DummyModelClass::class);
+
+        // $this->validate($request, []);
+
+        return DummyModelClass::storeRecord($request, $ParentDummyModelVariable);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \ParentDummyFullModelClass  $ParentDummyModelVariable
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function show(ParentDummyModelClass $ParentDummyModelVariable, DummyModelClass $DummyModelVariable)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \ParentDummyFullModelClass  $ParentDummyModelVariable
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, ParentDummyModelClass $ParentDummyModelVariable, DummyModelClass $DummyModelVariable)
+    {
+        // $this->authorize('update', $DummyModelVariable);
+
+        // $this->validate($request, []);
+
+        return DummyModelClass::updateRecord($request, $DummyModelVariable);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \ParentDummyFullModelClass  $ParentDummyModelVariable
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(ParentDummyModelClass $ParentDummyModelVariable, DummyModelClass $DummyModelVariable)
+    {
+        // $this->authorize('delete', $DummyModelVariable);
+
+        return DummyModelClass::destroyRecord($DummyModelVariable);
+    }
+}

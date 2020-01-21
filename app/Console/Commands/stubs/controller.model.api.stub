@@ -1,0 +1,80 @@
+<?php
+
+namespace DummyNamespace;
+
+use DummyFullModelClass;
+use Illuminate\Http\Request;
+use DummyRootNamespaceHttp\Resources\DummyModelClassCollection;
+use DummyRootNamespaceHttp\Controllers\Controller;
+
+class DummyClass extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        // $this->authorize('viewAny', DummyModelClass::class);
+
+        return new DummyModelClassCollection(
+            DummyModelClass::filterOn($request)->paginate($request->itemsPerPage)
+        );
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // $this->authorize('create', DummyModelClass::class);
+
+        // $this->validate($request, []);
+
+        return DummyModelClass::storeRecord($request);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function show(DummyModelClass $DummyModelVariable)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, DummyModelClass $DummyModelVariable)
+    {
+        // $this->authorize('update', $DummyModelVariable);
+
+        // $this->validate($request, []);
+
+        return DummyModelClass::updateRecord($request, $DummyModelVariable);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \DummyFullModelClass  $DummyModelVariable
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(DummyModelClass $DummyModelVariable)
+    {
+        // $this->authorize('delete', $DummyModelVariable);
+
+        return DummyModelClass::destroyRecord($DummyModelVariable);
+    }
+}

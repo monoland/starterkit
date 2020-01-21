@@ -1,0 +1,135 @@
+<?php
+
+namespace DummyNamespace;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Resources\DummyClassResource;
+use Illuminate\Database\Eloquent\Model;
+
+class DummyClass extends Model
+{
+    /**
+     * The connection name for the model.
+     *
+     * @var string|null
+     */
+    protected $connection = 'default';
+    
+    /**
+     * Relationship
+     */
+
+    /**
+     * Scope for combo
+     */
+    public function scopeFetchCombo($query)
+    {
+        return $query->select('name AS text', 'id AS value')->get();
+    }
+
+    /**
+     * Scope for filter
+     */
+    public function scopeFilterOn($query, $request)
+    {
+        $sortBy = strtolower($request->sortBy) ?: null;
+        $sortAz = $request->sortDesc ? 'desc' : 'asc';
+        $findBy = strtolower($request->findBy) ?: null;
+        $findIn = strtolower($request->findIn) ?: null;
+
+        $mquery = $query;
+
+        if ($findBy) {
+            $mquery = $mquery->whereRaw("LOWER({$findIn}) LIKE '%{$findBy}%'");
+        }
+
+        if ($sortBy) {
+            $mquery = $mquery->orderBy($sortBy, $sortAz);
+        }
+
+        return $mquery;
+    }
+
+    /**
+     * The store function
+     *
+     * @param Request $request
+     * @return void
+     */
+    public static function storeRecord(Request $request)
+    {
+        DB::beginTransaction();
+
+        try {
+            $model = new static;
+            // ...
+            $model->save();
+
+            DB::commit();
+
+            return new DummyClassResource($model);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * The update function
+     *
+     * @param Request $request
+     * @param [type] $model
+     * @return void
+     */
+    public static function updateRecord(Request $request, $model)
+    {
+        DB::beginTransaction();
+
+        try {
+            // ...
+            $model->save();
+
+            DB::commit();
+
+            return new DummyClassResource($model);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
+     * The destroy function
+     *
+     * @param [type] $model
+     * @return void
+     */
+    public static function destroyRecord($model)
+    {
+        DB::beginTransaction();
+
+        try {
+            $model->delete();
+
+            DB::commit();
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+}
