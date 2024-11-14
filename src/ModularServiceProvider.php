@@ -11,28 +11,12 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Http\Resources\Json\JsonResource;
 use Monoland\Platform\Http\Middleware\Impersonate;
 use Monoland\Platform\Console\Commands\PlatformInstall;
-use Monoland\Platform\Console\Commands\PlatformMakeJob;
-use Monoland\Platform\Console\Commands\PlatformMakeSeed;
-use Monoland\Platform\Console\Commands\PlatformMakeEvent;
-use Monoland\Platform\Console\Commands\PlatformMakeModel;
-use Monoland\Platform\Console\Commands\PlatformMakeExport;
-use Monoland\Platform\Console\Commands\PlatformMakeImport;
-use Monoland\Platform\Console\Commands\PlatformMakeModule;
-use Monoland\Platform\Console\Commands\PlatformMakePolicy;
 use Monoland\Platform\Console\Commands\PlatformModuleList;
 use Monoland\Platform\Console\Commands\PlatformModuleSeed;
-use Monoland\Platform\Console\Commands\PlatformMakeCommand;
-use Monoland\Platform\Console\Commands\PlatformMakeReplica;
 use Monoland\Platform\Console\Commands\PlatformModuleClone;
-use Monoland\Platform\Console\Commands\PlatformMakeFrontend;
-use Monoland\Platform\Console\Commands\PlatformMakeListener;
-use Monoland\Platform\Console\Commands\PlatformMakeResource;
 use Monoland\Platform\Console\Commands\PlatformModuleDelete;
-use Monoland\Platform\Console\Commands\PlatformMakeMigration;
 use Monoland\Platform\Console\Commands\PlatformModuleInstall;
 use Monoland\Platform\Console\Commands\PlatformModuleMigrate;
-use Monoland\Platform\Console\Commands\PlatformMakeController;
-use Monoland\Platform\Console\Commands\PlatformMakeNotification;
 
 class ModularServiceProvider extends ServiceProvider
 {

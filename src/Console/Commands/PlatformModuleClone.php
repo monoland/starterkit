@@ -30,6 +30,10 @@ class PlatformModuleClone extends Command
      */
     public function handle()
     {
+        if (!File::isDirectory(base_path('modules'))) {
+            File::makeDirectory(base_path('modules'));
+        }
+
         $directory = $this->option('directory') ?: File::basename($this->argument('repository'));
 
         if (File::isDirectory(base_path('modules' . DIRECTORY_SEPARATOR . $directory))) {

@@ -45,11 +45,6 @@ class PlatformInstall extends Command
             '--force' => true
         ]);
 
-        $this->call('module:clone', [
-            'repository' => 'git@github.com:monoland/mod-system.git',
-            '--directory' => 'system'
-        ]);
-
         $this->runComposerUpdate();
     }
 
