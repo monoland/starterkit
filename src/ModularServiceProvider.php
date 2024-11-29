@@ -12,9 +12,11 @@ use Illuminate\Http\Resources\Json\JsonResource;
 use Monoland\Platform\Http\Middleware\Impersonate;
 use Monoland\Platform\Console\Commands\PlatformInstall;
 use Monoland\Platform\Console\Commands\PlatformModuleList;
+use Monoland\Platform\Console\Commands\PlatformModulePull;
 use Monoland\Platform\Console\Commands\PlatformModuleSeed;
 use Monoland\Platform\Console\Commands\PlatformModuleClone;
 use Monoland\Platform\Console\Commands\PlatformModuleDelete;
+use Monoland\Platform\Console\Commands\PlatformModuleUpdate;
 use Monoland\Platform\Console\Commands\PlatformModuleInstall;
 use Monoland\Platform\Console\Commands\PlatformModuleMigrate;
 
@@ -89,7 +91,9 @@ class ModularServiceProvider extends ServiceProvider
                 PlatformModuleInstall::class,
                 PlatformModuleList::class,
                 PlatformModuleMigrate::class,
-                PlatformModuleSeed::class
+                PlatformModulePull::class,
+                PlatformModuleSeed::class,
+                PlatformModuleUpdate::class
             ]);
         }
     }
