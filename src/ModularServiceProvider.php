@@ -71,7 +71,7 @@ class ModularServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        URL::forceScheme('https');
+        URL::forceScheme(env('URL_FORCE_SCHEMA', 'https'));
 
         Fortify::ignoreRoutes();
     }
